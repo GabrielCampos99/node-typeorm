@@ -2,12 +2,14 @@
 
 import {
   Entity,
-  BaseEntity,
   Column,
-  PrimaryColumn,
   CreateDateColumn,
   UpdateDateColumn,
+  OneToMany,
+  ManyToMany,
 } from "typeorm";
+import { Banker } from "./Bankers";
+import { Transaction } from "./Transaction";
 
 import { Person } from "./utils/Person";
 
@@ -40,9 +42,16 @@ export class Client extends Person {
   })
   family_members: string[];
 
+  @OneToMany(() => Transaction, (transaction) => transaction.client)
+  transactions: Transaction[];
+
+  @ManyToMany(() => Banker)
+  bankers: Banker[];
   @CreateDateColumn()
   created_at: Date;
 
   @UpdateDateColumn()
   update_at: Date;
 }
+
+//Aqui temos uma relação de OneToMany.
