@@ -12,6 +12,7 @@ router.put("/api/banker/:bankerId/client/:clientId", async (req, res) => {
   const banker = await Banker.findOne(parseInt(bankerId));
 
   if (banker && client) {
+    //clients do @manyToMany em bankers;
     banker.clients = [client];
     await banker.save();
     await client.save();
