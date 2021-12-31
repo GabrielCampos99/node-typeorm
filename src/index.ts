@@ -8,6 +8,8 @@ import { createClientRouter } from "./routes/create_client";
 import { createBankerRouter } from "./routes/create_banker";
 import { createTransactionRouter } from "./routes/create_transaction";
 import { connectBankerToClientRouter } from "./routes/create_banker_to_client";
+import { deleteClientRouter } from "./routes/delete_clients";
+
 require("dotenv").config();
 
 const main = async () => {
@@ -30,6 +32,7 @@ const main = async () => {
     app.use(createBankerRouter);
     app.use(createTransactionRouter);
     app.use(connectBankerToClientRouter);
+    app.use(deleteClientRouter);
 
     app.listen(8080, () => {
       console.log("Server rodando");
