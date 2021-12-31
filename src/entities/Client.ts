@@ -8,7 +8,7 @@ import {
   OneToMany,
   ManyToMany,
 } from "typeorm";
-import { Banker } from "./Bankers";
+import { Banker } from "./Banker";
 import { Transaction } from "./Transaction";
 
 import { Person } from "./utils/Person";

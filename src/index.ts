@@ -1,7 +1,11 @@
 import { createConnection } from "typeorm";
-import { Banker } from "./entities/Bankers";
+const express = require("express");
+const app = express();
+import { Banker } from "./entities/Banker";
 import { Client } from "./entities/Client";
 import { Transaction } from "./entities/Transaction";
+import { createClientRouter } from "./routes/create_client";
+import { createBankerRouter } from "./routes/create_banker";
 require("dotenv").config();
 
 const main = async () => {
@@ -17,6 +21,15 @@ const main = async () => {
       entities: [Client, Banker, Transaction],
     });
     console.log("Connected to Postgres");
+
+    app.use(express.json());
+
+    app.use(createClientRouter);
+    app.use(createBankerRouter);
+
+    app.listen(8080, () => {
+      console.log("Server rodando");
+    });
   } catch (error) {
     console.error(error);
     throw new Error("Unable to connect to db");
